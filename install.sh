@@ -53,25 +53,4 @@ sudo echo "$username * $password *" >> /etc/ppp/chap-secrets
 sudo service pptpd restart
 
 
-
-echo "Acquire::GzipIndexes \"false\"; Acquire::CompressionTypes::Order:: \"gz\";" >/etc/apt/apt.conf.d/docker-gzip-indexes && \
- sed -i s/archive.ubuntu.com/ftp.sjtu.edu.cn/g /etc/apt/sources.list && \
- sed -i s/security.ubuntu.com/ftp.sjtu.edu.cn/g /etc/apt/sources.list && \
- apt update && \
- apt -y upgrade && \
- apt -y dist-upgrade && \
- apt -y install pptpd ntp ntpdate net-tools iputils-ping wget python2 && \
- apt -y install perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions unzip locales && \
- apt -y install libglib2.0-0 libglib2.0-data libicu70 libxml2 shared-mime-info xdg-user-dirs && \
- dpkg-reconfigure locales && \
- locale-gen C.UTF-8 && \
- /usr/sbin/update-locale LANG=C.UTF-8 && \
- wget http://prdownloads.sourceforge.net/webadmin/webmin_2.001_all.deb && \
- dpkg --install webmin_2.001_all.deb && \
- apt -y install -f  && \
- 
-echo "Starting Webmin Service ..."
-    /usr/sbin/service webmin restart
- /usr/share/webmin/changepass.pl /etc/webmin root pass
- 
 echo "All done!"
